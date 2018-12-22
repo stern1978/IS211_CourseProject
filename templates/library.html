@@ -1,0 +1,60 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="static/mystyle.css" />
+<title>My Library</title>
+<style>
+    tr {background-color: white}
+</style>
+</head>
+
+<body>
+
+<div class=flash>{{message}}</div>
+    
+
+<form action = "/search" method="post">
+    Book Search:<input type="text" name="booksearch"></input>
+    <input type="submit" value="Add to Library"></input>
+
+<table name="My Books" border = "1">
+    <tr>
+        <th colspan="4" style="text-align: center">My Books</th>
+    </tr>
+  
+    <tr>
+        <th>Thumbnail</th>        
+        <th>Title</th>
+        <th>Author</th>
+        <th>Number of Pages</th>
+        <th>Rating</th>
+    </tr>
+  
+    {% for book in books %}
+  
+    <tr>
+        <td><a href={{book.link}}><img src='{{book.thumbnail}}' alt={{book.title}}></a></td>
+        <td>{{book.title}}</td>
+        <td>{{book.author}}</td>
+        <td>{{book.pages}}</td>
+        <td>{{book.rating}}</td>
+        
+        <td><form action = "/delete" method="post">
+            <input type="hidden" name="delete" value="{{book.title}}">
+            <button id="w3-btn">Remove</button>
+            </form></td>
+
+        <!---<td><input="text" name="title">
+            <input type="submit" value="Delete"</a></input></td>--->
+    </tr>
+    {% else %}
+    <tr>No Books Entered</tr>
+    {% endfor %}
+</table>
+
+
+<!---<div><a href="/student/add">Add New Student</a></div>--->
+
+</body>
+
+</html>
